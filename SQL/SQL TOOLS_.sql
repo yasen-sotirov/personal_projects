@@ -84,10 +84,22 @@
 --     UPDATE (за актуализиране)
 --     DELETE (за изтриване)
     
+
+
+
+-- --------------------------------------------
+##	SELECT_
+
+SELECT salary, Top  
+FROM employee_salary;
+
+
+
+
     
 
 -- --------------------------------------------
-##	DISTINCT	-  връща уникалните (неповтарящи) се записи 
+##	DISTINCT_	-  връща уникалните (неповтарящи) се записи 
 
 -- SELECT distinct gender
 -- FROM parks_and_recreation.employee_demographics;
@@ -95,7 +107,7 @@
 
 
 -- --------------------------------------------
-##	OPERATORS	AND OR ><=
+##	OPERATORS	AND_ OR_ ><=
 
 -- SELECT salary
 -- FROM parks_and_recreation.employee_salary
@@ -113,8 +125,21 @@
 
 
 
+#	WHERE_
+
+-- SELECT *
+-- FROM layoffs_stageing2
+-- WHERE total_laid_off IS NULL
+-- AND percentage_laid_off IS NULL;
+
+-- SELECT *
+-- FROM layoffs_stageing2
+-- WHERE industry IS NULL
+-- OR industry = '';
+
+
 -- --------------------------------------------
-##	LIKE
+##	LIKE_
 
 #	% - заменя произволен брой елементи преди/след търсената част отдума:    1986% 
 -- SELECT *
@@ -129,7 +154,7 @@
 
 
 -- --------------------------------------------
-##	GROUP BY	+ AVG  MIN  MAX
+##	GROUP BY_	+ AVG  MIN  MAX
 -- групира редовете според еднa или повече колони 
 -- използва се с агрегатни функции като SUM(), COUNT(), AVG(), MIN(), MAX(), 
 -- за да се изчислят стойности за всяка група. Така се обобщават и изчисляват данни по групи.
@@ -145,7 +170,7 @@
 
 
 -- --------------------------------------------
-##	COUNT()	
+##	COUNT_	
 
 #1
 -- SELECT COUNT(distinct salary)		-- брой уникалните, неповтарящи се записи
@@ -159,7 +184,7 @@
 
 
 -- --------------------------------------------
-## 	ROUND
+## 	ROUND_
 
 -- SELECT round(avg(age), -0) AS 'средни години', gender
 -- FROM parks_and_recreation.employee_demographics
@@ -171,7 +196,7 @@
 
 
 -- --------------------------------------------
-##	ORDER BY	ASC/DESC
+##	ORDER BY_	ASC/DESC
 
 -- SELECT *
 -- FROM parks_and_recreation.employee_demographics
@@ -185,7 +210,7 @@
 
 
 -- --------------------------------------------
-##	HAVING		-- Показва резултатите имащи дадено условие. Работи с агрегатни функции след group by. 
+##	HAVING_		-- Показва резултатите имащи дадено условие. Работи с агрегатни функции след group by. 
 
 # 1		-- office manager avg 5500
 -- SELECT occupation, AVG(salary)
@@ -208,7 +233,7 @@
 
 
 -- --------------------------------------------
-## LIMIT		- ограничава показаните резултати до определен брой
+## LIMIT_		- ограничава показаните резултати до определен брой
 
 -- #1
 -- SELECT first_name, age
@@ -225,7 +250,7 @@
 
 
 -- --------------------------------------------
-# ALIASING
+#	AS_		aliasing
 
 -- SELECT gender, AVG(age) AS avg_age
 -- FROM parks_and_recreation.employee_demographics
@@ -236,7 +261,7 @@
 
 
 -- --------------------------------------------
-## SELF RELATION		-- обединява колони от различни таблици
+## SELF RELATION_		-- обединява колони от различни таблици
 
 #1	-- обединява колони от трите таблици
 -- SELECT demo.first_name, demo.age, sala.salary, dept.department_name
@@ -260,16 +285,23 @@
 
 
 -- --------------------------------------------
-##	ISNULL		-- търси празна клетка в колоната dept_id
+##	IS NULL_		-- търси празна клетка в колоната dept_id
 
-SELECT first_name, last_name 
-FROM parks_and_recreation.employee_salary 
-WHERE isnull(dept_id);
+#1
+-- SELECT * 
+-- FROM parks_and_recreation.employee_salary 
+-- WHERE isnull(dept_id);
+
+#2
+-- SELECT * 
+-- FROM parks_and_recreation.employee_salary 
+-- WHERE dept_id IS NULL;
+
 
 
 
 -- --------------------------------------------
-## JOINS		- обединява две таблици ако имат колони със сходни данни
+## JOIN_		- обединява две таблици ако имат колони със сходни данни
 
 
 #1	JOIN (INNER)	- обединява редовете, ако ги има и в двете таблици
@@ -317,8 +349,11 @@ WHERE isnull(dept_id);
 
 
 
+
+
+
 -- --------------------------------------------
-## UNION	- обединява един SELECT statemant с друг SELECT statemant
+## UNION_	- обединява един SELECT statemant с друг SELECT statemant
 			-- 1:32:05
 
 #1		- връща записите от двете таблици в една колона, отгоре кол 1 после кол 2
@@ -363,41 +398,46 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-##	STRING FUNCTIONS	1:34:54		- build in functions
+-- ============================================
+##	STRING_ MANIPULATIONS	1:34:54		- build in functions
 
 
-#	CONCAT
+
+
+#	CONCAT_
 -- SELECT first_name, last_name, CONCAT(first_name, ' ', last_name) AS 'име и фамилия'
 -- FROM parks_and_recreation.employee_demographics;
 
 
-# 	BETWEEN
+
+
+# 	BETWEEN_
 -- SELECT first_name, salary BETWEEN 60000 AND 70000
 -- FROM parks_and_recreation.employee_salary;
 
 
 
-# 	IN 	- точно попадениеalter
+# 	IN_ 	- точно попадение
 -- SELECT first_name, salary, salary IN (55000, 70000)
 -- FROM parks_and_recreation.employee_salary;
 
 
 
-# 	LENGTH
+# 	LENGTH_
 -- SELECT  first_name, length(first_name)
 -- FROM parks_and_recreation.employee_demographics;
 
 
-# 	UPPER
+# 	UPPER_
 -- SELECT  first_name, upper(first_name) AS 'главни'
 -- FROM parks_and_recreation.employee_demographics;
 
 
-#	TRIM	- премахва преди и след думата
+#	TRIM_	- премахва преди и след думата
 -- SELECT trim('  sky  ') AS 'чиста дума';
 
 
-#	TRAILING	- премахва конкретно нещо
+#	TRAILING_	- премахва конкретно нещо
 -- SELECT country, TRIM(TRAILING '.' FROM country)
 
 
@@ -415,25 +455,59 @@ WHERE isnull(dept_id);
 -- FROM parks_and_recreation.employee_demographics;
 
 
-# 	SUBSTRING		- като str sliceing 
+# 	SUBSTRING_		- като str sliceing 
 -- SELECT last_name, SUBSTRING(birth_date, 6,2) AS 'рожден месец'
 -- FROM parks_and_recreation.employee_demographics;	
 
 
-# 	REPLACE
+# 	SUBSTRING_ INDEX		- показва първата част до делимитера
+-- SELECT 
+--   SUBSTRING_INDEX('a,b,c', ',', 2) AS part1,
+--   SUBSTRING_INDEX(SUBSTRING_INDEX('a,b,c', ',', 2), ',', -1) AS part2,
+--   SUBSTRING_INDEX('a,b,c', ',', -1) AS part3;
+
+-- SELECT 
+-- 	SUBSTRING_INDEX('a,b-c', ',', 1) AS part1,
+-- 	SUBSTRING_INDEX('a,b-c', '-', 1) AS part2;
+
+
+# 	REPLACE_
 -- SELECT first_name, REPLACE(first_name, 'a', 'A')
 -- FROM parks_and_recreation.employee_demographics;
 
 
-#	LOCATE		- може да се ползва за проверка дали даден ред има търсената частица
+#	LOCATE_		- може да се ползва за проверка дали даден ред има търсената частица
 -- SELECT first_name, LOCATE('An', first_name)
 -- FROM parks_and_recreation.employee_demographics;
 
 
 
 
+
+
+
 -- --------------------------------------------
-##	CASE WHEN STATEMANT	1:48:00		- създава нова колона, където показва резултата от условието
+##	DATE_
+
+#	STR_TO_DATE		- конвертира дата от стринг - с `` 
+
+-- SELECT `date`, STR_TO_DATE(`date`, '%m/%d/%Y')
+-- FROM world_layoffs.layoffs_stageing2;
+
+
+
+# 	извеждане на месец/година
+
+-- SELECT first_name, birth_date, 
+-- YEAR(birth_date) AS `год.`, 
+-- MONTH(birth_date) AS `мес.`, 
+-- DAY(birth_date) AS `ден`
+-- FROM parks_and_recreation.employee_demographics;
+
+
+
+-- --------------------------------------------
+##	CASE_ WHEN STATEMANT	1:48:00		- създава нова колона, където показва резултата от условието
 
 -- SELECT first_name, age, 
 -- CASE
@@ -465,7 +539,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-##	SUBQUERY
+##	SUBQUERY_
 
 #1
 -- SELECT *
@@ -500,23 +574,24 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## 	WINDOW FUNCTIONS	2:07:00
+## 	WINDOW FUNCTIONS	2:07:00  функции върху прозорец от редове
 
 
-
-#	OVER	-- подбно на group by, но може да се включи допълнителна информация, 
+#	OVER_	-- подбно на group by, но може да се включи допълнителна информация, 
 			-- без тя да се повлияе от групирането
-
--- SELECT dem.first_name, dem.last_name, gender, 
--- 	AVG(salary)
---     OVER (PARTITION BY gender)
--- FROM parks_and_recreation.employee_demographics AS dem
--- JOIN parks_and_recreation.employee_salary AS sal
--- 	ON dem.employee_id = sal.employee_id
+            -- работи с SUM(), AVG(), RANK(), LEAD() 
 
 
 
-#	ROLLING TOTAL	-- добавя своята сума към всеки следващ запис
+SELECT dem.first_name, dem.last_name, gender,  
+	AVG(salary) OVER (PARTITION BY gender) AS 'средна заплата по пол'
+FROM parks_and_recreation.employee_demographics AS dem
+JOIN parks_and_recreation.employee_salary AS sal
+	ON dem.employee_id = sal.employee_id;
+
+
+
+#	ROLLING_ TOTAL	-- добавя своята сума към всеки следващ запис
 
 -- SELECT dem.first_name, dem.last_name, gender, salary,
 -- 	SUM(salary)
@@ -529,7 +604,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## ROW NUMBER	2:10:00
+## ROW_ NUMBER	2:10:00
 
 # 1		-- дава ново число, което не се повтаря
 -- SELECT dem.first_name, dem.last_name, gender, salary,
@@ -558,9 +633,10 @@ WHERE isnull(dept_id);
 -- 	ON dem.employee_id = sal.employee_id;
     
   
-  
+
+ 
 -- --------------------------------------------
-##	RANK		-- добавя ранг, като дава следващото числ според позицията на записа: 5 после 7 
+##	RANK_		-- добавя ранг, като дава следващото числ според позицията на записа: 5 после 7 
  
 -- SELECT dem.first_name, dem.last_name, gender, salary,
 -- 	ROW_NUMBER() OVER(PARTITION BY gender ORDER BY salary DESC) AS row_num,
@@ -570,7 +646,10 @@ WHERE isnull(dept_id);
 -- 	ON dem.employee_id = sal.employee_id;
 
 
-##	DENSE_RANK		-- добавя ранг, като дава следващото числ по ред на числата
+
+
+
+##	DENSE_ RANK		-- добавя ранг, като дава следващото числ по ред на числата
  
 -- SELECT dem.first_name, dem.last_name, gender, salary,
 -- 	ROW_NUMBER() OVER(PARTITION BY gender ORDER BY salary DESC) AS row_num,
@@ -607,6 +686,10 @@ WHERE isnull(dept_id);
 -- FROM employee_salary
 -- WHERE employee_id = 13;
 
+## 	премахване на колоната row_num
+-- ALTER TABLE layoffs_stageing2
+-- DROP COLUMN row_num;
+
 
 -- --------------------------------------------
 ## ADVANCED SQL TUTORIAL	2:20:10
@@ -614,7 +697,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## CTE - Common Tabale Expression		като Lambda функция
+## CTE_ - Common Tabale Expression		като Lambda функция
 		-- временен резултат от заявка, който се  SQL сесия 
         -- временно именуван резултат. дефинира в рамките на една заявка и съществува в рамките ѝ.
         -- може да се използва многократно в нея.
@@ -624,7 +707,7 @@ WHERE isnull(dept_id);
 
 
 #1                                    
--- WITH CTE_Example AS
+-- WITH <example> AS
 -- 	(
 --     SELECT gender, AVG(salary) avg_sal, MAX(salary) max_sal, MIN(salary) min_sal, COUNT(salary) 
 --     FROM parks_and_recreation.employee_demographics AS dem
@@ -653,7 +736,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## TEMPORARY TABLES	2:30:44		-- създава временна таблица, за сложни 
+## TEMPORARY_ TABLES	2:30:44		-- създава временна таблица, за сложни 
 
 -- CREATE TEMPORARY TABLE salary_over_60k
 -- SELECT *
@@ -667,7 +750,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
--- STORED PROCEDURES 	2:38:20 
+-- STORED_ PROCEDURES 	2:38:20 
 		-- съхранява кода и може да се преизползва многократно
         -- или се създава с десен бутон от SCHEMAS > stored procedures 
 
@@ -705,7 +788,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## TRIGGERS	2:51:00		-- прави нещо при събитие
+## TRIGGERS_	2:51:00		-- прави нещо при събитие
 
 -- DELIMITER $$
 -- CREATE TRIGGER employee_insert_into_salary
@@ -729,7 +812,7 @@ WHERE isnull(dept_id);
 
 
 -- --------------------------------------------
-## EVENTS	3:01:01	-- случва се по график и прави нещо
+## EVENTS_	3:01:01	-- случва се по график и прави нещо
 
 -- DELIMITER $$
 -- CREATE EVENT delete_id_13
@@ -748,10 +831,14 @@ WHERE isnull(dept_id);
 
 
 
-##	КОПИРАНЕ НА ТАБЛИЦА (колоните)
+
+
+-- --------------------------------------------
+##	COPY_ TABLE (колоните)
 
 CREATE TABLE parks_and_recreation.employee_demographics_copy
 LIKE parks_and_recreation.employee_demographics;
+
 
 ##	КОПИРАНЕ НА ЗАПИСИТЕ ОТ ТАБЛИЦА
 
